@@ -99,7 +99,7 @@
         <version>2.2</version>
         <configuration>
           <path>/tcs-jsf-treinamento</path>
-          <port>8080</port>
+          <port>8081</port>
           <defaultContextFile>${basedir}/src/main/webapp/META-INF/context.xml</defaultContextFile>
         </configuration>
       </plugin>

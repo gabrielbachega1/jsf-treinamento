@@ -108,6 +108,8 @@ public class ConsultaPessoaBean implements Serializable {
         pessoa.setTipoDocumento(pessoaSelecionada.getTipoDocumento());
         pessoa.setNumeroCPF(pessoaSelecionada.getNumeroCPF());
         pessoa.setNumeroCNPJ(pessoaSelecionada.getNumeroCNPJ());
+        pessoa.setNomeCachorro(pessoaSelecionada.getNomeCachorro());
+        pessoa.setDataCachorro(pessoaSelecionada.getDataCachorro());
         pessoa.setDataManutencao(new Date());
         pessoa.setAtivo(getTpManutencao());
         return pessoa;

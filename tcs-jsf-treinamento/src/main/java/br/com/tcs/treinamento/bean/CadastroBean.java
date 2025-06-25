@@ -44,6 +44,9 @@ public class CadastroBean implements Serializable {
         pessoa.setNumeroCNPJ(cadastrarPessoa.getNumeroCNPJ());
         pessoa.setNomeCachorro(cadastrarPessoa.getNomeCachorro());
         pessoa.setDataCachorro(cadastrarPessoa.getDataCachorro());
+        pessoa.setTipoDocumentoPet(cadastrarPessoa.getTipoDocumentoPet());
+        pessoa.setNumeroSinPatinhas(cadastrarPessoa.getNumeroSinPatinhas());
+        pessoa.setNumeroCertidaoPet(cadastrarPessoa.getNumeroCertidaoPet());
         pessoa.setAtivo(true);
 
         // Chama o service para persistir a entidade
@@ -69,6 +72,9 @@ public class CadastroBean implements Serializable {
         cadastrarPessoa.setNumeroCNPJ(null);
         cadastrarPessoa.setNomeCachorro(null);
         cadastrarPessoa.setDataCachorro(null);
+        cadastrarPessoa.setTipoDocumentoPet(null);
+        cadastrarPessoa.setNumeroSinPatinhas(null);
+        cadastrarPessoa.setNumeroCertidaoPet(null);
         errorMessage = null;
     }
 
@@ -86,12 +92,6 @@ public class CadastroBean implements Serializable {
         }
         if (cadastrarPessoa.getData() == null) {
             erros.add("Data de nascimento não informada.");
-        }
-        if (cadastrarPessoa.getNomeCachorro() == null || cadastrarPessoa.getNomeCachorro().trim().isEmpty()) {
-            erros.add("Nome do cachorro não informado.");
-        }
-        if (cadastrarPessoa.getDataCachorro() == null) {
-            erros.add("Data de nascimento do cachorro não informada.");
         }
         if (cadastrarPessoa.getTipoDocumento() == null || cadastrarPessoa.getTipoDocumento().trim().isEmpty()) {
             erros.add("Tipo de documento não informado.");
@@ -112,6 +112,39 @@ public class CadastroBean implements Serializable {
         if (!erros.isEmpty()) {
             errorMessage = String.join("<br/>", erros);
             PrimeFaces.current().executeScript("PF('errorDialog').show();");
+        } else {
+            PrimeFaces.current().executeScript("PF('confirmDialog').show();");
+        }
+    }
+
+    public void validarCamposCachorro() {
+        List<String> erros = new ArrayList<>();
+
+        if (cadastrarPessoa.getNomeCachorro() == null || cadastrarPessoa.getNomeCachorro().trim().isEmpty()) {
+            erros.add("Nome do cachorro não informado.");
+        }
+        if (cadastrarPessoa.getDataCachorro() == null) {
+            erros.add("Data de nascimento do cachorro não informada.");
+        }
+        if (cadastrarPessoa.getTipoDocumentoPet() == null || cadastrarPessoa.getTipoDocumentoPet().trim().isEmpty()) {
+            erros.add("Tipo de documento pet não informado.");
+        } else {
+            if ("SinPatinhas".equals(cadastrarPessoa.getTipoDocumentoPet())) {
+                if (cadastrarPessoa.getNumeroSinPatinhas() == null || cadastrarPessoa.getNumeroSinPatinhas().trim().isEmpty() ||
+                        cadastrarPessoa.getNumeroSinPatinhas().trim().length() < 11) {
+                    erros.add("SinPatinhas não informado ou incompleto (deve conter 11 dígitos).");
+                }
+            } else if ("Certidão Pet".equals(cadastrarPessoa.getTipoDocumentoPet())) {
+                if (cadastrarPessoa.getNumeroCertidaoPet() == null || cadastrarPessoa.getNumeroCertidaoPet().trim().isEmpty() ||
+                        cadastrarPessoa.getNumeroCertidaoPet().trim().length() < 14) {
+                    erros.add("CertidãoPet não informado ou incompleto (deve conter 14 dígitos).");
+                }
+            }
+        }
+
+        if (!erros.isEmpty()) {
+            errorMessage = String.join("<br/>", erros);
+            PrimeFaces.current().executeScript("PF('errorDialogCachorro').show();");
         } else {
             PrimeFaces.current().executeScript("PF('confirmDialog').show();");
         }

@@ -31,7 +31,7 @@ public class Pessoa implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date data;
 
-    @Column(nullable = false)
+    @Column(name = "nomeCachorro")
     private String nomeCachorro;
 
     @Temporal(TemporalType.DATE)
@@ -45,6 +45,15 @@ public class Pessoa implements Serializable {
 
     // Número do CNPJ (caso tipoDocumento seja CNPJ)
     private String numeroCNPJ;
+
+    // Indica se o documento é SinPatinhas ou CertidãoPet
+    private String tipoDocumentoPet;
+
+    // Número do SinPatinhas (caso tipoDocumento seja SinPatinhas)
+    private String numeroSinPatinhas;
+
+    // Número da CertidaoPet (caso tipoDocumento seja CertidãoPet)
+    private String numeroCertidaoPet;
 
     // Motivo da manutenção (alteração, exclusão ou desativação)
     private String motivoManutencao;
@@ -62,7 +71,8 @@ public class Pessoa implements Serializable {
 
     // Construtor completo (opcional para facilitar a criação)
     public Pessoa(String nome, Integer idade, String email, Date data, String tipoDocumento,
-                  String numeroCPF, String numeroCNPJ, String motivoManutencao, Date dataManutencao, Boolean ativo, String nomeCachorro, Date dataCachorro) {
+                  String numeroCPF, String numeroCNPJ, String motivoManutencao, Date dataManutencao,
+                  Boolean ativo, String nomeCachorro, Date dataCachorro, String tipoDocumentoPet, String numeroSinPatinhas, String numeroCertidaoPet) {
         this.nome = nome;
         this.idade = idade;
         this.email = email;
@@ -75,6 +85,9 @@ public class Pessoa implements Serializable {
         this.ativo = ativo;
         this.nomeCachorro = nomeCachorro;
         this.dataCachorro = dataCachorro;
+        this.tipoDocumentoPet = tipoDocumentoPet;
+        this.numeroSinPatinhas = numeroSinPatinhas;
+        this.numeroCertidaoPet = numeroCertidaoPet;
     }
 
     // Getters e Setters
@@ -157,6 +170,30 @@ public class Pessoa implements Serializable {
 
     public void setDataCachorro(Date dataCachorro) {
         this.dataCachorro = dataCachorro;
+    }
+
+    public String getTipoDocumentoPet() {
+        return tipoDocumentoPet;
+    }
+
+    public void setTipoDocumentoPet(String tipoDocumentoPet) {
+        this.tipoDocumentoPet = tipoDocumentoPet;
+    }
+
+    public String getNumeroSinPatinhas() {
+        return numeroSinPatinhas;
+    }
+
+    public void setNumeroSinPatinhas(String numeroSinPatinhas) {
+        this.numeroSinPatinhas = numeroSinPatinhas;
+    }
+
+    public String getNumeroCertidaoPet() {
+        return numeroCertidaoPet;
+    }
+
+    public void setNumeroCertidaoPet(String numeroCertidaoPet) {
+        this.numeroCertidaoPet = numeroCertidaoPet;
     }
 
     public String getMotivoManutencao() {

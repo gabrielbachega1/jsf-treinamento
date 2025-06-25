@@ -12,71 +12,99 @@
     <ui:define name="content">
         <h:form id="formCadastro">
             <!-- Inclui o modal (confirmarModel.xhtml) para reutilização -->
-            <ui:include src="/model/confirmarModel.xhtml" >
-                    <ui:param name="modalBean" value="#{cadastroBean}"/>
+            <ui:include src="/model/confirmarModel.xhtml">
+                <ui:param name="modalBean" value="#{cadastroBean}"/>
             </ui:include>
 
             <p:panel header="Formulário de Cadastro" style="width:600px;">
                 <!-- Mensagens gerais de erro -->
-                <p:messages showDetail="true" closable="true" />
+                <p:messages showDetail="true" closable="true"/>
 
                 <!-- Formulário com painel de duas colunas -->
                 <p:panelGrid columns="2" columnClasses="label,value" style="width:100%; margin-bottom:1em;">
                     <p:outputLabel for="nome" value="Nome Completo:"
-                                   style="text-align: left; white-space: nowrap;" />
+                                   style="text-align: left; white-space: nowrap;"/>
                     <p:inputText id="nome" value="#{cadastroBean.cadastrarPessoa.nome}"
-                                 style="width:100%;" />
+                                 style="width:100%;"/>
 
-                    <p:outputLabel for="idade" value="Idade:" styleClass="label" />
+                    <p:outputLabel for="idade" value="Idade:" styleClass="label"/>
                     <p:inputText id="idade" value="#{cadastroBean.cadastrarPessoa.idade}"
-                                 style="width:4em;" />
+                                 style="width:4em;"/>
 
-                    <p:outputLabel for="email" value="E-mail:" styleClass="label" />
+                    <p:outputLabel for="email" value="E-mail:" styleClass="label"/>
                     <p:inputText id="email" value="#{cadastroBean.cadastrarPessoa.email}"
-                                 style="width:100%;" />
+                                 style="width:100%;"/>
 
-                    <p:outputLabel for="data" value="Data de Nascimento:" styleClass="label" />
+                    <p:outputLabel for="data" value="Data de Nascimento:" styleClass="label"/>
                     <p:calendar id="data" value="#{cadastroBean.cadastrarPessoa.data}"
-                                pattern="dd/MM/yyyy" showIcon="true" />
+                                pattern="dd/MM/yyyy" showIcon="true"/>
 
-                    <p:outputLabel for="tipo" value="Tipo de Documento:" styleClass="label" />
+                    <p:outputLabel for="tipo" value="Tipo de Documento:" styleClass="label"/>
                     <p:selectOneMenu id="tipo" value="#{cadastroBean.cadastrarPessoa.tipoDocumento}"
                                      style="width:100%;">
-                        <f:selectItem itemLabel="Selecione" itemValue="" noSelectionOption="true" />
-                        <f:selectItem itemLabel="CPF" itemValue="CPF" />
-                        <f:selectItem itemLabel="CNPJ" itemValue="CNPJ" />
-                        <p:ajax update="docPanel" process="@this" />
+                        <f:selectItem itemLabel="Selecione" itemValue="" noSelectionOption="true"/>
+                        <f:selectItem itemLabel="CPF" itemValue="CPF"/>
+                        <f:selectItem itemLabel="CNPJ" itemValue="CNPJ"/>
+                        <p:ajax update="docPanel" process="@this"/>
                     </p:selectOneMenu>
 
                     <!-- Bloco para CPF / CNPJ -->
                     <h:panelGroup id="docPanel" layout="block">
                         <!-- Campo CPF: exibido se o tipo for CPF -->
                         <p:outputLabel for="cpf" value="CPF:" styleClass="label"
-                                       style="#{cadastroBean.cadastrarPessoa.tipoDocumento eq 'CPF' ? '' : 'display:none;'}" />
+                                       style="#{cadastroBean.cadastrarPessoa.tipoDocumento eq 'CPF' ? '' : 'display:none;'}"/>
                         <p:inputMask id="cpf" value="#{cadastroBean.cadastrarPessoa.numeroCPF}"
                                      mask="999.999.999-99"
                                      autoClear="true" unmask="true"
                                      disabled="#{cadastroBean.cadastrarPessoa.tipoDocumento ne 'CPF'}"
-                                     style="width:100%; #{cadastroBean.cadastrarPessoa.tipoDocumento eq 'CPF' ? '' : 'display:none;'}" />
+                                     style="width:100%; #{cadastroBean.cadastrarPessoa.tipoDocumento eq 'CPF' ? '' : 'display:none;'}"/>
 
                         <!-- Campo CNPJ: exibido se o tipo for CNPJ -->
                         <p:outputLabel for="cnpj" value="CNPJ:" styleClass="label"
-                                       style="#{cadastroBean.cadastrarPessoa.tipoDocumento eq 'CNPJ' ? '' : 'display:none;'}" />
+                                       style="#{cadastroBean.cadastrarPessoa.tipoDocumento eq 'CNPJ' ? '' : 'display:none;'}"/>
                         <p:inputMask id="cnpj" value="#{cadastroBean.cadastrarPessoa.numeroCNPJ}"
                                      mask="99.999.999/9999-99"
                                      autoClear="true" unmask="true"
                                      disabled="#{cadastroBean.cadastrarPessoa.tipoDocumento ne 'CNPJ'}"
-                                     style="width:100%; #{cadastroBean.cadastrarPessoa.tipoDocumento eq 'CNPJ' ? '' : 'display:none;'}" />
+                                     style="width:100%; #{cadastroBean.cadastrarPessoa.tipoDocumento eq 'CNPJ' ? '' : 'display:none;'}"/>
                     </h:panelGroup>
 
                     <p:outputLabel for="nomeCachorro" value="Nome do Cachorro:"
-                                   style="text-align: left; white-space: nowrap;" />
+                                   style="text-align: left; white-space: nowrap;"/>
                     <p:inputText id="nomeCachorro" value="#{cadastroBean.cadastrarPessoa.nomeCachorro}"
-                                 style="width:100%;" />
+                                 style="width:100%;"/>
 
-                    <p:outputLabel for="dataCachorro" value="Data de Nascimento do Cachorro:" styleClass="label" />
+                    <p:outputLabel for="dataCachorro" value="Data de Nascimento do Cachorro:" styleClass="label"/>
                     <p:calendar id="dataCachorro" value="#{cadastroBean.cadastrarPessoa.dataCachorro}"
-                                pattern="dd/MM/yyyy" showIcon="true" />
+                                pattern="dd/MM/yyyy" showIcon="true"/>
+
+                    <p:outputLabel for="tipoPet" value="Tipo de Documento Pet:" styleClass="label"/>
+                    <p:selectOneMenu id="tipoPet" value="#{cadastroBean.cadastrarPessoa.tipoDocumentoPet}"
+                                     style="width:100%;">
+                        <f:selectItem itemLabel="Selecione" itemValue="" noSelectionOption="true"/>
+                        <f:selectItem itemValue="SinPatinhas" itemLabel="SinPatinhas"/>
+                        <f:selectItem itemValue="Certidão PET" itemLabel="Certidão PET"/>
+                        <p:ajax update="docPanelPet" process="@this"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel value=""/>
+                    <h:panelGroup id="docPanelPet" layout="block">
+                        <p:outputLabel for="sinPatinhas" value="SinPatinhas:" styleClass="label"
+                                       style="#{cadastroBean.cadastrarPessoa.tipoDocumentoPet eq 'SinPatinhas' ? '' : 'display:none;'}"/>
+                        <p:inputMask id="sinPatinhas" value="#{cadastroBean.cadastrarPessoa.numeroSinPatinhas}"
+                                     mask="999.999.999-99"
+                                     autoClear="true" unmask="true"
+                                     disabled="#{cadastroBean.cadastrarPessoa.tipoDocumentoPet ne 'SinPatinhas'}"
+                                     style="width:100%; #{cadastroBean.cadastrarPessoa.tipoDocumentoPet eq 'SinPatinhas' ? '' : 'display:none;'}"/>
+
+                        <p:outputLabel for="certidaoPet" value="Certidão PET:" styleClass="label"
+                                       style="#{cadastroBean.cadastrarPessoa.tipoDocumentoPet eq 'Certidão PET' ? '' : 'display:none;'}"/>
+                        <p:inputMask id="certidaoPet" value="#{cadastroBean.cadastrarPessoa.numeroCertidaoPet}"
+                                     mask="99.999.999/9999-99"
+                                     autoClear="true" unmask="true"
+                                     disabled="#{cadastroBean.cadastrarPessoa.tipoDocumentoPet ne 'Certidão PET'}"
+                                     style="width:100%; #{cadastroBean.cadastrarPessoa.tipoDocumentoPet eq 'Certidão PET' ? '' : 'display:none;'}"/>
+                    </h:panelGroup>
                 </p:panelGrid>
 
                 <p:separator/>
@@ -85,45 +113,84 @@
                                  action="#{cadastroBean.limpar}"
                                  update="@form"
                                  icon="pi pi-refresh"
-                                 styleClass="ui-button-secondary" />
-
+                                 styleClass="ui-button-secondary"/>
                 <!-- Botão Salvar chama o método de validação na bean.
                      Se a validação for bem-sucedida, o método validarCampos() invoca o modal de confirmação. -->
                 <p:commandButton value="Salvar"
                                  action="#{cadastroBean.validarCampos}"
                                  update="@form"
                                  icon="pi pi-save"
-                                 ajax="true" />
+                                 ajax="true"
+                                 style="margin-right: 5px"/>
 
                 <p:commandButton value="Cachorro"
-                                 action="#{cadastroBean.validarCampos}"
+                                 action="#{cadastroBean.validarCamposCachorro}"
                                  update="@form"
                                  icon="pi pi-heart"
-                                 ajax="true" />
+                                 ajax="true"
+                                 style="margin-right: 5px"/>
 
+                <p:commandButton value="Digitável"
+                                 icon="pi pi-pencil"
+                                 onclick="PF('modalDigitavel').show();"
+                                 styleClass="ui-button-raised ui-button-help"
+                                 type="button"/>
             </p:panel>
 
             <!-- Diálogo para exibir a lista de campos não preenchidos -->
             <p:dialog widgetVar="errorDialog" header="Campos não preenchidos"
                       modal="true" closable="false" resizable="false">
-                <h:outputText value="#{cadastroBean.errorMessage}" escape="false" />
+                <h:outputText value="#{cadastroBean.errorMessage}" escape="false"/>
                 <f:facet name="footer">
                     <p:commandButton value="Fechar"
                                      onclick="PF('errorDialog').hide();"
-                                     type="button" />
+                                     type="button"/>
+                </f:facet>
+            </p:dialog>
+            <!-- Model erro cachorro -->
+            <p:dialog widgetVar="errorDialogCachorro" header="Campos referentes ao seu cachorro não preenchidos"
+                      modal="true" closable="false" resizable="false">
+                <h:outputText value="#{cadastroBean.errorMessage}" escape="false"/>
+                <f:facet name="footer">
+                    <p:commandButton value="Fechar"
+                                     onclick="PF('errorDialogCachorro').hide();"
+                                     type="button"
+                                     style="background-color: #dc3545"/>
                 </f:facet>
             </p:dialog>
             <!-- Diaglogo de sucesso-->
             <p:dialog widgetVar="successDialog" header="Sucesso"
                       modal="true" closable="false" resizable="false">
-                <h:outputText value="Cadastro realizado com sucesso!" />
+                <h:outputText value="Cadastro realizado com sucesso!"/>
                 <f:facet name="footer">
                     <p:commandButton value="Ok"
                                      onclick="PF('successDialog').hide();"
-                                     type="button" />
+                                     type="button"/>
                 </f:facet>
             </p:dialog>
+
         </h:form>
+        <!-- Modal editavel -->
+        <p:dialog header="Digite um texto" widgetVar="modalDigitavel"
+                  modal="true" closable="true" resizable="false">
+            <h:form id="formModal">
+                <h:panelGrid columns="1">
+                    <p:inputText id="entrada"
+                                 value="#{textoDigitado.textoDigitado}"
+                                 placeholder="Digite aqui:" />
+
+                    <p:commandButton value="Enviar"
+                                     actionListener="#{textoDigitado.mostrarTexto}"
+                                     process="@form"
+                                     update="formModal:saidaMensagem" />
+
+                    <p:messages id="saidaMensagem"
+                                showDetail="true"
+                                autoUpdate="false"
+                                closable="false" />
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
     </ui:define>
 
     <ui:define name="footer">

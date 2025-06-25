@@ -50,6 +50,16 @@
                                 <h:outputText value="#{not empty p.numeroCPF ? p.numeroCPF : p.numeroCNPJ}" />
                             </p:column>
 
+                            <p:column headerText="Nome do cachorro" style="width:25%;">
+                                #{p.nomeCachorro}
+                            </p:column>
+
+                            <p:column headerText="Data de Nascimento do cachorro" style="width:12%;">
+                                <h:outputText value="#{p.dataCachorro}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </h:outputText>
+                            </p:column>
+
                             <p:column headerText="Data da manutenção" style="width:18%;">
                                 <h:outputText value="#{p.dataManutencao}">
                                     <f:convertDateTime pattern="dd/MM/yyyy" />
