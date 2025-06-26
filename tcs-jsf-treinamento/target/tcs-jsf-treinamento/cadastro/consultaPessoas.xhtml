@@ -26,7 +26,9 @@
                                      emptyMessage="Nenhuma pessoa cadastrada."
                                      rowKey="#{p.id}"
                                      styleClass="ui-datatable-striped ui-datatable-hover"
-                                     style="width:100%; table-layout:auto;">
+                                     style="width:100%; table-layout:auto;"
+                                     class="tabela-consulta"
+                                     id="tabela-consulta-pessoa">
 
                             <p:column headerText="Nome" style="width:25%;">
                                 #{p.nome}
@@ -48,6 +50,20 @@
 
                             <p:column headerText="CPF / CNPJ" style="width:17%;">
                                 <h:outputText value="#{not empty p.numeroCPF ? p.numeroCPF : p.numeroCNPJ}" />
+                            </p:column>
+
+                            <p:column headerText="Nome do cachorro" style="width:25%;">
+                                #{p.nomeCachorro}
+                            </p:column>
+
+                            <p:column headerText="Data de Nascimento do cachorro" style="width:12%;">
+                                <h:outputText value="#{p.dataCachorro}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column headerText="SinPatinhas / CertidãoPet" style="width:17%;">
+                                <h:outputText value="#{not empty p.numeroSinPatinhas ? p.numeroSinPatinhas : p.numeroCertidaoPet}" />
                             </p:column>
 
                             <p:column headerText="Data da manutenção" style="width:18%;">
@@ -86,7 +102,9 @@
                                              action="#{consultaPessoaBean.exportarPdf}"
                                              icon="pi pi-file-pdf"
                                              styleClass="ui-button-secondary"
-                                             style="margin-right:10px;" />
+                                             style="margin-right:10px;" >
+                            </p:commandButton>
+
                             <p:commandButton value="Exportar Excel"
                                              action="#{consultaPessoaBean.exportarExcel}"
                                              icon="pi pi-file-excel"

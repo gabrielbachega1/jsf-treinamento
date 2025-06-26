@@ -22,3 +22,7 @@ input,
 .ui-calendar input {
   width: calc(100% - 30px); /* espaço pro botão de calendário */
 }
+
+.tabela-consulta td:nth-child(1){
+  background-color: #c4cfcb;
+}

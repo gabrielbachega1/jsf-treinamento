@@ -68,6 +68,43 @@
                                      disabled="#{consultaPessoaBean.pessoaSelecionada.tipoDocumento ne 'CNPJ'}"
                                      style="width:100%; #{consultaPessoaBean.pessoaSelecionada.tipoDocumento eq 'CNPJ' ? '' : 'display:none;'}" />
                     </h:panelGroup>
+
+                    <p:outputLabel for="nomeCachorro" value="Nome do Cachorro:"
+                                   style="text-align: left; white-space: nowrap;"/>
+                    <p:inputText id="nomeCachorro" value="#{consultaPessoaBean.pessoaSelecionada.nomeCachorro}"
+                                 style="width:100%;"/>
+
+                    <p:outputLabel for="dataCachorro" value="Data de Nascimento do Cachorro:" styleClass="label"/>
+                    <p:calendar id="dataCachorro" value="#{consultaPessoaBean.pessoaSelecionada.dataCachorro}"
+                                pattern="dd/MM/yyyy" showIcon="true"/>
+
+                    <p:outputLabel for="tipoPet" value="Tipo de Documento Pet:" styleClass="label"/>
+                    <p:selectOneMenu id="tipoPet" value="#{consultaPessoaBean.pessoaSelecionada.tipoDocumentoPet}"
+                                     style="width:100%;">
+                        <f:selectItem itemLabel="Selecione" itemValue="" noSelectionOption="true"/>
+                        <f:selectItem itemValue="SinPatinhas" itemLabel="SinPatinhas"/>
+                        <f:selectItem itemValue="Certidão PET" itemLabel="Certidão PET"/>
+                        <p:ajax update="docPanelPet" process="@this"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel value=""/>
+                    <h:panelGroup id="docPanelPet" layout="block">
+                        <p:outputLabel for="sinPatinhas" value="SinPatinhas:" styleClass="label"
+                                       style="#{cadastroBean.cadastrarPessoa.tipoDocumentoPet eq 'SinPatinhas' ? '' : 'display:none;'}"/>
+                        <p:inputMask id="sinPatinhas" value="#{consultaPessoaBean.pessoaSelecionada.numeroSinPatinhas}"
+                                     mask="999.999.999-99"
+                                     autoClear="true" unmask="true"
+                                     disabled="#{consultaPessoaBean.pessoaSelecionada.tipoDocumentoPet ne 'SinPatinhas'}"
+                                     style="width:100%; #{consultaPessoaBean.pessoaSelecionada.tipoDocumentoPet eq 'SinPatinhas' ? '' : 'display:none;'}"/>
+
+                        <p:outputLabel for="certidaoPet" value="Certidão PET:" styleClass="label"
+                                       style="#{cadastroBean.cadastrarPessoa.tipoDocumentoPet eq 'Certidão PET' ? '' : 'display:none;'}"/>
+                        <p:inputMask id="certidaoPet" value="#{consultaPessoaBean.pessoaSelecionada.numeroCertidaoPet}"
+                                     mask="99.999.999/9999-99"
+                                     autoClear="true" unmask="true"
+                                     disabled="#{consultaPessoaBean.pessoaSelecionada.tipoDocumentoPet ne 'Certidão PET'}"
+                                     style="width:100%; #{consultaPessoaBean.pessoaSelecionada.tipoDocumentoPet eq 'Certidão PET' ? '' : 'display:none;'}"/>
+                    </h:panelGroup>
                 </p:panelGrid>
 
                 <p:separator/>

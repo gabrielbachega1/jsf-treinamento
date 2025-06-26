@@ -1,3 +1,5 @@
+package br.com.tcs.treinamento.bean;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
