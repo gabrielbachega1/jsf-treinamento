@@ -173,5 +173,4 @@ public class CadastroBean implements Serializable {
         // Re-inicializa o serviço para evitar que seja nulo ou uma instância não serializável
         this.pessoaService = new PessoaServiceImpl();
     }
-
 }

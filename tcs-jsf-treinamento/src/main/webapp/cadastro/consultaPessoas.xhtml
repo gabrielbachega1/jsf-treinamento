@@ -60,6 +60,10 @@
                                 </h:outputText>
                             </p:column>
 
+                            <p:column headerText="SinPatinhas / CertidãoPet" style="width:17%;">
+                                <h:outputText value="#{not empty p.numeroSinPatinhas ? p.numeroSinPatinhas : p.numeroCertidaoPet}" />
+                            </p:column>
+
                             <p:column headerText="Data da manutenção" style="width:18%;">
                                 <h:outputText value="#{p.dataManutencao}">
                                     <f:convertDateTime pattern="dd/MM/yyyy" />

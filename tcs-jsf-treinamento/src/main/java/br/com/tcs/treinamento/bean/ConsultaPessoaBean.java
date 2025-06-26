@@ -110,6 +110,9 @@ public class ConsultaPessoaBean implements Serializable {
         pessoa.setNumeroCNPJ(pessoaSelecionada.getNumeroCNPJ());
         pessoa.setNomeCachorro(pessoaSelecionada.getNomeCachorro());
         pessoa.setDataCachorro(pessoaSelecionada.getDataCachorro());
+        pessoa.setTipoDocumentoPet(pessoaSelecionada.getTipoDocumentoPet());
+        pessoa.setNumeroSinPatinhas(pessoaSelecionada.getNumeroSinPatinhas());
+        pessoa.setNumeroCertidaoPet(pessoaSelecionada.getNumeroCertidaoPet());
         pessoa.setDataManutencao(new Date());
         pessoa.setAtivo(getTpManutencao());
         return pessoa;
@@ -157,6 +160,27 @@ public class ConsultaPessoaBean implements Serializable {
                 if (pessoaSelecionada.getNumeroCNPJ() == null || pessoaSelecionada.getNumeroCNPJ().trim().isEmpty() ||
                         pessoaSelecionada.getNumeroCNPJ().trim().length() < 14) {
                     erros.add("CNPJ não informado ou incompleto (deve conter 14 dígitos).");
+                }
+            }
+        }
+        if (pessoaSelecionada.getNomeCachorro() == null || pessoaSelecionada.getNomeCachorro().trim().isEmpty()) {
+            erros.add("Nome do cachorro não informado.");
+        }
+        if (pessoaSelecionada.getDataCachorro() == null) {
+            erros.add("Data de nascimento do cachorro não informada.");
+        }
+        if (pessoaSelecionada.getTipoDocumentoPet() == null || pessoaSelecionada.getTipoDocumentoPet().trim().isEmpty()) {
+            erros.add("Tipo de documento pet não informado.");
+        } else {
+            if ("SinPatinhas".equals(pessoaSelecionada.getTipoDocumentoPet())) {
+                if (pessoaSelecionada.getNumeroSinPatinhas() == null || pessoaSelecionada.getNumeroSinPatinhas().trim().isEmpty() ||
+                        pessoaSelecionada.getNumeroSinPatinhas().trim().length() < 11) {
+                    erros.add("SinPatinhas não informado ou incompleto (deve conter 11 dígitos).");
+                }
+            } else if ("Certidão Pet".equals(pessoaSelecionada.getTipoDocumentoPet())) {
+                if (pessoaSelecionada.getNumeroCertidaoPet() == null || pessoaSelecionada.getNumeroCertidaoPet().trim().isEmpty() ||
+                        pessoaSelecionada.getNumeroCertidaoPet().trim().length() < 14) {
+                    erros.add("CertidãoPet não informado ou incompleto (deve conter 14 dígitos).");
                 }
             }
         }

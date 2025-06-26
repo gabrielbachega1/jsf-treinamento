@@ -22,5 +22,4 @@ public class TabelaImagens {
 
     public List<Integer> getRows() { return rows; }
     public List<Integer> getColumns() { return columns; }
-
 }
