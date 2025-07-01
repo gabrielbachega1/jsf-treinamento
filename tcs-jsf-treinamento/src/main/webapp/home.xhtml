@@ -9,15 +9,41 @@
     </ui:define>
 
     <ui:define name="content">
-        <h:form>
-        <div style="width:100%; text-align:center; margin-top:100px;">
-                <h:outputText value="Bem-vindo ao treinamento JSF!"
-                              style="font-size:36px; font-weight:bold; display:block; margin-bottom:20px;" />
+        <h:form id="formPrincipal">
+            <div style="width:100%; text-align:center; margin-top:100px;">
+                <h:panelGroup id="mensagem">
+                    <h:outputText value="Bem-vindo ao treinamento JSF, #{textoDigitado.textoDigitado}"
+                                  style="font-size:36px; font-weight:bold; display:block; margin-bottom:20px;" />
+                </h:panelGroup>
+
 
                 <h:outputText value="Use o menu acima para navegar pelas telas e tenha um bom treinamento."
-                              style="font-size:22px;" />
+                              style="font-size:22px;"/>
+                <br></br><br></br>
+                <p:commandButton value="Insira seu nome"
+                                 icon="pi pi-pencil"
+                                 onclick="PF('modalDigitavel').show();"
+                                 styleClass="ui-button-raised ui-button-help"
+                                 type="button"/>
             </div>
         </h:form>
+
+
+        <p:dialog header="Digite seu nome" widgetVar="modalDigitavel"
+                  modal="true" closable="true" resizable="false">
+            <h:form id="formModal">
+                <h:panelGrid columns="1">
+                    <p:inputText id="entrada"
+                                 value="#{textoDigitado.textoDigitado}"
+                                 placeholder="Digite aqui:"/>
+
+                    <p:commandButton value="Enviar"
+                                     process="@form"
+                                     update="formPrincipal:mensagem"
+                                     oncomplete="PF('modalDigitavel').hide();" />
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
     </ui:define>
 
 </ui:composition>

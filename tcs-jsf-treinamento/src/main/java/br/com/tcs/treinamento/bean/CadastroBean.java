@@ -1,7 +1,7 @@
 package br.com.tcs.treinamento.bean;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
@@ -15,7 +15,7 @@ import br.com.tcs.treinamento.service.impl.PessoaServiceImpl;
 import org.primefaces.PrimeFaces;
 
 @ManagedBean(name="cadastroBean")
-@ViewScoped
+@SessionScoped
 public class CadastroBean implements Serializable {
     private static final long serialVersionUID = 3450069247988201468L;
 

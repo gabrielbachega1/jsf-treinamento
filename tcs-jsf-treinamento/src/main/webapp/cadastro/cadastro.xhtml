@@ -10,6 +10,10 @@
     </ui:define>
 
     <ui:define name="content">
+        <h:panelGroup id="mensagem">
+            <h:outputText value="Bem-vindo ao treinamento JSF, #{textoDigitado.textoDigitado}"
+                          style="font-size:24px; font-weight:bold; display:block; margin-bottom:20px;" />
+        </h:panelGroup>
         <h:form id="formCadastro">
             <!-- Inclui o modal (confirmarModel.xhtml) para reutilização -->
             <ui:include src="/model/confirmarModel.xhtml">
@@ -53,9 +57,13 @@
                         <!-- Campo CPF: exibido se o tipo for CPF -->
                         <p:outputLabel for="cpf" value="CPF:" styleClass="label"
                                        style="#{cadastroBean.cadastrarPessoa.tipoDocumento eq 'CPF' ? '' : 'display:none;'}"/>
-                        <p:inputMask id="cpf" value="#{cadastroBean.cadastrarPessoa.numeroCPF}"
+                        <p:inputMask id="cpf"
+                                     value="#{cadastroBean.cadastrarPessoa.numeroCPF}"
                                      mask="999.999.999-99"
-                                     autoClear="true" unmask="true"
+                                     slotChar="0"
+                                     dir="rtl"
+                                     autoClear="false" unmask="false"
+                                     onkeyup="this.setSelectionRange(this.value.length,this.value.length)"
                                      disabled="#{cadastroBean.cadastrarPessoa.tipoDocumento ne 'CPF'}"
                                      style="width:100%; #{cadastroBean.cadastrarPessoa.tipoDocumento eq 'CPF' ? '' : 'display:none;'}"/>
 
@@ -63,8 +71,12 @@
                         <p:outputLabel for="cnpj" value="CNPJ:" styleClass="label"
                                        style="#{cadastroBean.cadastrarPessoa.tipoDocumento eq 'CNPJ' ? '' : 'display:none;'}"/>
                         <p:inputMask id="cnpj" value="#{cadastroBean.cadastrarPessoa.numeroCNPJ}"
+                                     slotChar="00000000000"
+                                     dir="rtl"
+                                     onkeyup="this.setSelectionRange(this.value.length,this.value.length)"
                                      mask="99.999.999/9999-99"
-                                     autoClear="true" unmask="true"
+                                     autoClear="false"
+                                     unmask="false"
                                      disabled="#{cadastroBean.cadastrarPessoa.tipoDocumento ne 'CNPJ'}"
                                      style="width:100%; #{cadastroBean.cadastrarPessoa.tipoDocumento eq 'CNPJ' ? '' : 'display:none;'}"/>
                     </h:panelGroup>
@@ -129,12 +141,6 @@
                                  icon="pi pi-heart"
                                  ajax="true"
                                  style="margin-right: 5px"/>
-
-                <p:commandButton value="Digitável"
-                                 icon="pi pi-pencil"
-                                 onclick="PF('modalDigitavel').show();"
-                                 styleClass="ui-button-raised ui-button-help"
-                                 type="button"/>
             </p:panel>
 
             <!-- Diálogo para exibir a lista de campos não preenchidos -->

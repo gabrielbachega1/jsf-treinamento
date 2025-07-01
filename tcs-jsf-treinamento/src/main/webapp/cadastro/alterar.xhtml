@@ -55,7 +55,9 @@
                                        style="#{consultaPessoaBean.pessoaSelecionada.tipoDocumento eq 'CPF' ? '' : 'display:none;'}" />
                         <p:inputMask id="cpf" value="#{consultaPessoaBean.pessoaSelecionada.numeroCPF}"
                                      mask="999.999.999-99"
-                                     autoClear="true" unmask="true"
+                                     slotChar="0"
+                                     dir="rtl"
+                                     onkeyup="this.setSelectionRange(this.value.length,this.value.length)"
                                      disabled="#{consultaPessoaBean.pessoaSelecionada.tipoDocumento ne 'CPF'}"
                                      style="width:100%; #{consultaPessoaBean.pessoaSelecionada.tipoDocumento eq 'CPF' ? '' : 'display:none;'}" />
 
